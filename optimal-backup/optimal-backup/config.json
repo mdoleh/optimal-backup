@@ -1,10 +1,12 @@
 {
   "BackupDirs": [
-    "G:\\Movies",
-    "G:\\TV Shows"
+    "K:\\Movies",
+    "K:\\TV Shows",
+    "K:\\My Stuff"
   ],
   "OriginalDirs": [
-    "E:\\Movies",
-    "E:\\TV Shows"
+    "D:\\Movies",
+    "D:\\TV Shows",
+    "F:\\My Stuff"
   ]
 }

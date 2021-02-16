@@ -6,5 +6,7 @@ namespace optimal_backup.Utils
     {
         void Log(string message);
         void Log(Exception ex);
+
+        void FlushLogs();
     }
 }

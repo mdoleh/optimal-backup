@@ -23,6 +23,8 @@ namespace optimal_backup
             try
             {
                 performBackup();
+                _logger.Log("Backup completed! Press CTRL + C to exit.");
+                Console.Read();
             } catch (Exception ex)
             {
                 _logger.Log(ex);
@@ -74,15 +76,32 @@ namespace optimal_backup
                 filesToBackup.Add(new List<string>());
                 string configDir = _config.OriginalDirs[i];
 
-                List<string> originalDirs = Directory.GetDirectories(configDir).ToList();
+                List<string> originalDirs = getDirectories(_config.OriginalDirs[i]);
                 filesToBackup[i].AddRange(getFiles(configDir));
 
                 foreach (string dir in originalDirs)
                 {
-                    filesToBackup[i].AddRange(getFiles(dir));
+                    filesToBackup[i].AddRange(getAllFiles(dir));
                 }
             }
             return filesToBackup;
+        }
+
+        private List<string> getAllFiles(string path)
+        {
+            List<string> files = getFiles(path);
+            List<string> dirs = getDirectories(path);
+            foreach (string dir in dirs)
+            {
+                files.AddRange(getAllFiles(dir));
+            }
+
+            return files;
+        }
+
+        private List<string> getDirectories(string path)
+        {
+            return Directory.GetDirectories(path).ToList();
         }
 
         private List<string> getFiles(string path)

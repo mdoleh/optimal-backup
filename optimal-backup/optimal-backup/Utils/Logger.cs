@@ -15,6 +15,11 @@ namespace optimal_backup.Utils
             _builder = new StringBuilder();
         }
 
+        public void FlushLogs()
+        {
+            File.WriteAllText(_filePath, _builder.ToString());
+        }
+
         public void Log(string message)
         {
             Console.WriteLine(message);
@@ -34,7 +39,7 @@ namespace optimal_backup.Utils
             Log("=======================================");
             Log($"A log file was written to {_filePath}");
             Log("=======================================");
-            File.WriteAllText(_filePath, _builder.ToString());
+            FlushLogs();
         }
 
         private string getTimestamp()
